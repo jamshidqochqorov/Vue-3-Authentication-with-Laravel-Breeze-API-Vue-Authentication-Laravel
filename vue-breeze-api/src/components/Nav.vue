@@ -1,3 +1,8 @@
+<script setup>
+import { useAuthStore} from "../stores/auth.js";
+const authStore = useAuthStore();
+
+</script>
 <template>
     <nav class="rounded bg-indigo-900 text-white px-2 py-2.5 sm:px-4">
         <div
@@ -63,25 +68,26 @@
                         >
                     </li>
 
-                        <li>
-                            <router-link
-                                :to="{ name: 'Login' }"
-                                class="
+                       <template v-if="!authStore.user">
+                           <li>
+                               <router-link
+                                   :to="{ name: 'Login' }"
+                                   class="
                   block
-                  rounded
+           rounded
                   py-2
                   pr-4
                   pl-3
                   text-gray-50
                   hover:bg-gray-700
                 "
-                            >Login</router-link
-                            >
-                        </li>
-                        <li>
-                            <router-link
-                                :to="{ name: 'Register' }"
-                                class="
+                               >Login</router-link
+                               >
+                           </li>
+                           <li>
+                               <router-link
+                                   :to="{ name: 'Register' }"
+                                   class="
                   block
                   rounded
                   py-2
@@ -91,13 +97,14 @@
                   hover:bg-gray-700
                   md:border-0
                 "
-                            >Register</router-link
-                            >
-                        </li>
-
-                        <button
-                            @click="authStore.handleLogout"
-                            class="
+                               >Register</router-link
+                               >
+                           </li>
+                       </template>
+                       <template v-else>
+                           <button
+                               @click="authStore.handleLogout"
+                               class="
                 block
                 rounded
                 py-2
@@ -107,9 +114,11 @@
                 hover:bg-gray-700
                 md:border-0
               "
-                        >
-                            Logout
-                        </button>
+                           >
+                               Logout
+                           </button>
+                       </template>
+
                 </ul>
             </div>
         </div>
