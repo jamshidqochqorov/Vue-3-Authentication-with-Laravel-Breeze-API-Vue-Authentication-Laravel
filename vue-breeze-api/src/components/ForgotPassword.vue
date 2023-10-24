@@ -11,12 +11,12 @@ const email = ref("");
         @submit.prevent="authStore.handleForgotPassword(email)"
     >
         <h3 class="font-bold">Forgot password</h3>
-<!--        <div-->
-<!--            class="m-2 p-2 text-green-900 font-semibold bg-green-300 rounded-md"-->
-<!--            v-if="authStore.status"-->
-<!--        >-->
-<!--            {{ authStore.status }}-->
-<!--        </div>-->
+        <div
+            class="m-2 p-2 text-green-900 font-semibold bg-green-300 rounded-md"
+            v-if="authStore.status"
+        >
+            {{ authStore.status }}
+        </div>
         <div class="my-6">
             <label
                 for="email"
@@ -45,11 +45,11 @@ const email = ref("");
         "
                 placeholder="email@laraveller.com"
             />
-<!--            <div v-if="authStore.errors.email" class="flex">-->
-<!--        <span class="text-red-400 text-sm m-2 p-2">{{-->
-<!--                authStore.errors.email[0]-->
-<!--            }}</span>-->
-<!--            </div>-->
+            <div v-if="authStore.errors.email" class="flex">
+        <span class="text-red-400 text-sm m-2 p-2">{{
+                authStore.errors.email[0]
+            }}</span>
+            </div>
         </div>
         <button
             class="

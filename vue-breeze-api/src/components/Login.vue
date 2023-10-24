@@ -28,7 +28,7 @@
               md:px-[60px]
             "
                     >
-                        <div class="mb-10 text-center md:mb-16">Laraveller</div>
+                        <div class="mb-10 text-center md:mb-16">Login</div>
                         <form @submit.prevent = "authStore.handleLogin(form)">
                             <div class="mb-6">
                                 <input
@@ -50,9 +50,9 @@
                     focus-visible:shadow-none
                   "
                                 />
-                                <div class="flex">
+                                <div v-if="authStore.errors.email" class="flex">
                   <span class="text-red-400 text-sm m-2 p-2">{{
-
+                          authStore.errors.email[0]
                       }}</span>
                                 </div>
                             </div>
@@ -76,9 +76,9 @@
                     focus-visible:shadow-none
                   "
                                 />
-                                <div class="flex">
+                                <div v-if="authStore.errors.password" class="flex">
                   <span class="text-red-400 text-sm m-2 p-2">{{
-
+                          authStore.errors.password[0]
                       }}</span>
                                 </div>
                             </div>
@@ -111,6 +111,7 @@
                             Forgot Password?
                         </router-link>
                         <p class="text-base text-[#adadad]">
+
                             Not a member yet?
                             <router-link to="/register" class="text-primary hover:underline">
                                 Sign Up

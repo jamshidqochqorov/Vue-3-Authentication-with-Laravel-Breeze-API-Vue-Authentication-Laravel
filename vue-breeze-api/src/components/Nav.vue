@@ -10,7 +10,7 @@ const authStore = useAuthStore();
             bis_skin_checked="1"
         >
             <a href="https://laraveller.com/" class="flex items-center">
-                Laraveller
+                Jamshid | (
             </a>
             <button
                 data-collapse-toggle="navbar-default"

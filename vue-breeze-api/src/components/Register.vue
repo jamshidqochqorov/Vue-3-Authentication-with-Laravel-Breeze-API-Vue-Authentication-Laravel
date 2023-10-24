@@ -3,9 +3,9 @@ import { ref } from "vue";
 import axios from "axios";
 import {useRouter} from 'vue-router'
 const router  = useRouter()
-// import { useAuthStore } from "../stores/auth";
+import { useAuthStore } from "../stores/auth";
 
-// const authStore = useAuthStore();
+const authStore = useAuthStore();
 
 const form = ref({
     name: "",
@@ -13,16 +13,6 @@ const form = ref({
     password: "",
     password_confirmation: "",
 });
-
-const handleRegister = async ()=>{
-    await axios.post("/register",{
-        name:form.value.name,
-        email:form.value.email,
-        password: form.value.password,
-        password_confirmation:form.value.password_confirmation
-    });
-    router.push("/")
-}
 
 </script>
 <template>
@@ -46,8 +36,8 @@ const handleRegister = async ()=>{
               md:px-[60px]
             "
                     >
-                        <div class="mb-10 text-center md:mb-16">Laraveller</div>
-                        <form @submit.prevent="handleRegister">
+                        <div class="mb-10 text-center md:mb-16">Register</div>
+                        <form @submit.prevent="authStore.handleRegister(form)">
                             <div class="mb-6">
                                 <input
                                     type="text"
@@ -68,8 +58,10 @@ const handleRegister = async ()=>{
                     focus-visible:shadow-none
                   "
                                 />
-                                <div  class="flex">
-                  <span class="text-red-400 text-sm m-2 p-2"></span>
+                                <div v-if="authStore.errors.name" class="flex">
+                  <span class="text-red-400 text-sm m-2 p-2">{{
+                          authStore.errors.name[0]
+                      }}</span>
                                 </div>
                             </div>
                             <div class="mb-6">
@@ -92,8 +84,10 @@ const handleRegister = async ()=>{
                     focus-visible:shadow-none
                   "
                                 />
-                                <div  class="flex">
-                  <span class="text-red-400 text-sm m-2 p-2"></span>
+                                <div v-if="authStore.errors.email" class="flex">
+                  <span class="text-red-400 text-sm m-2 p-2">{{
+                          authStore.errors.email[0]
+                      }}</span>
                                 </div>
                             </div>
                             <div class="mb-6">
@@ -116,8 +110,10 @@ const handleRegister = async ()=>{
                     focus-visible:shadow-none
                   "
                                 />
-                                <div  class="flex">
-                  <span class="text-red-400 text-sm m-2 p-2"></span>
+                                <div v-if="authStore.errors.password" class="flex">
+                  <span class="text-red-400 text-sm m-2 p-2">{{
+                          authStore.errors.password[0]
+                      }}</span>
                                 </div>
                             </div>
                             <div class="mb-6">
@@ -154,7 +150,7 @@ const handleRegister = async ()=>{
                     text-white
                   "
                                 >
-                                    Register
+                                    Register{{authStore.error}}
                                 </button>
                             </div>
                         </form>
